@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineMatch - Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* CineMatch Brand Colors */
+            --cm-deep-blue: #2C5F87;       /* Primary - Trust & depth */
+            --cm-coral-red: #E94B3C;       /* Secondary - Energy & excitement */
+            --cm-charcoal: #1A1D23;        /* Dark primary */
+            --cm-dark-bg: #0F1419;         /* Background dark */
+            --cm-midnight: #0A0C10;        /* Deepest black */
+            --cm-slate: #2A2E35;           /* Surface dark */
+            --cm-steel: #4A5568;           /* Mid-tone gray */
+            --cm-silver: #9CA3AF;          /* Light gray text */
+            --cm-light-gray: #F5F5F5;      /* Light backgrounds */
+            --cm-off-white: #FAFAFA;       /* Off white */
+            --cm-pearl: #FFFFFF;           /* Pure white */
+            
+            /* Accent Colors */
+            --cm-gold: #F59E0B;            /* Awards/featured */
+            --cm-purple: #8B5CF6;          /* Drama genre */
+            --cm-teal: #14B8A6;            /* Success states */
+            --cm-orange: #FB923C;          /* Action genre */
+            --cm-pink: #EC4899;            /* Romance genre */
+            --cm-green: #10B981;           /* Positive ratings */
+            
+            /* Functional Colors */
+            --primary: var(--cm-deep-blue);
+            --secondary: var(--cm-coral-red);
+            --success: var(--cm-green);
+            --warning: var(--cm-gold);
+            --error: var(--cm-coral-red);
+            --info: var(--cm-deep-blue);
+            
+            /* Typography */
+            --font-display: 'Playfair Display', serif;  /* Dramatic headings */
+            --font-primary: 'Inter', sans-serif;        /* UI and body text */
+            --font-mono: 'Monaco', 'Courier New', monospace;
+            
+            /* Spacing Scale */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+            --space-xxxl: 64px;
+            
+            /* Animation */
+            --anim-fast: 0.15s;
+            --anim-normal: 0.3s;
+            --anim-slow: 0.5s;
+            --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            /* Shadows - Cinematic depth */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+            --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 20px rgba(44, 95, 135, 0.4);
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+        }
+
+        /* Reset & Base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            background: var(--cm-off-white);
+            color: var(--cm-charcoal);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Typography Scale */
+        .text-display {
+            font-size: 48px;
+            font-weight: 800;
+            font-family: var(--font-display);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        .text-heading {
+            font-size: 36px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+        .text-title {
+            font-size: 24px;
+            font-weight: 600;
+            font-family: var(--font-primary);
+            line-height: 1.3;
+        }
+        .text-subtitle {
+            font-size: 18px;
+            font-weight: 500;
+            font-family: var(--font-primary);
+            line-height: 1.4;
+        }
+        .text-body {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        .text-small {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+        .text-caption {
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .text-mono {
+            font-family: var(--font-mono);
+        }
+        .text-muted {
+            color: var(--cm-silver);
+        }
+        
+        /* Main Structure */
+        .header {
+            background: linear-gradient(135deg, var(--cm-deep-blue), var(--cm-coral-red));
+            color: var(--cm-pearl);
+            text-align: center;
+            padding: var(--space-xxxl) var(--space-lg);
+        }
+        .header h1 {
+            font-size: 48px;
+            font-family: var(--font-display);
+            margin-bottom: var(--space-md);
+        }
+        .header p {
+            font-size: 20px;
+            opacity: 0.95;
+        }
+        
+        .main-content {
+            background: var(--cm-off-white);
+        }
+        .section {
+            padding: var(--space-xxxl) var(--space-lg);
+            max-width: 1400px;
+            margin: 0 auto;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section-header {
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+        .section-title {
+            font-size: 36px;
+            font-weight: 800;
+            font-family: var(--font-display);
+            color: var(--cm-charcoal);
+            margin-bottom: var(--space-sm);
+        }
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--cm-steel);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .component-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        /* Navigation */
+        .nav-fixed {
+            position: fixed;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-xl);
+            padding: var(--space-md);
+            border: 1px solid #E5E7EB;
+            box-shadow: var(--shadow-lg);
+            max-width: 200px;
+        }
+        .nav-list {
+            list-style: none;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--cm-steel);
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            transition: all var(--anim-normal);
+            display: block;
+            font-size: 14px;
+        }
+        .nav-link:hover {
+            background: var(--cm-light-gray);
+            color: var(--cm-charcoal);
+        }
+        .nav-link.active {
+            background: var(--primary);
+            color: var(--cm-pearl);
+        }
+        
+        /* Color System */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+        .color-swatch {
+            border: 1px solid #E5E7EB;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--anim-normal);
+            cursor: pointer;
+        }
+        .color-swatch:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        .color-blob {
+            height: 120px;
+        }
+        .color-info {
+            padding: var(--space-md);
+            background: var(--cm-pearl);
+        }
+        .color-info strong {
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+            margin-bottom: var(--space-xs);
+        }
+        .color-info span {
+            display: block;
+            font-size: 12px;
+            color: var(--cm-silver);
+            font-family: var(--font-mono);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 16px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all var(--anim-normal) var(--ease-out);
+            text-decoration: none;
+            font-family: var(--font-primary);
+        }
+        .btn-primary {
+            background: var(--cm-deep-blue);
+            color: var(--cm-pearl);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-primary:hover {
+            background: #234A6D;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-secondary {
+            background: var(--cm-coral-red);
+            color: var(--cm-pearl);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-secondary:hover {
+            background: #D93B2C;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--cm-deep-blue);
+            border-color: var(--cm-deep-blue);
+        }
+        .btn-outline:hover {
+            background: var(--cm-deep-blue);
+            color: var(--cm-pearl);
+            transform: translateY(-2px);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--cm-steel);
+        }
+        .btn-ghost:hover {
+            background: var(--cm-light-gray);
+            color: var(--cm-charcoal);
+        }
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 18px;
+        }
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        
+        /* Input Fields */
+        .input-field {
+            padding: 12px 16px;
+            border: 2px solid #E5E7EB;
+            border-radius: var(--radius-md);
+            outline: none;
+            background: var(--cm-pearl);
+            width: 100%;
+            transition: all var(--anim-normal);
+            font-family: var(--font-primary);
+            font-size: 16px;
+            color: var(--cm-charcoal);
+        }
+        .input-field:focus {
+            border-color: var(--cm-deep-blue);
+            box-shadow: 0 0 0 3px rgba(44, 95, 135, 0.1);
+        }
+        .input-field::placeholder {
+            color: var(--cm-silver);
+        }
+        
+        /* Movie Card Example */
+        .movie-card {
+            background: var(--cm-pearl);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--anim-normal) var(--ease-out);
+            cursor: pointer;
+            position: relative;
+        }
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .movie-card-image {
+            width: 100%;
+            aspect-ratio: 2/3;
+            background: linear-gradient(135deg, var(--cm-slate), var(--cm-steel));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cm-silver);
+            font-size: 48px;
+        }
+        .movie-card-content {
+            padding: var(--space-md);
+        }
+        .movie-card-title {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: var(--space-xs);
+            color: var(--cm-charcoal);
+        }
+        .movie-card-meta {
+            display: flex;
+            gap: var(--space-md);
+            font-size: 14px;
+            color: var(--cm-steel);
+            margin-bottom: var(--space-sm);
+        }
+        .movie-card-genre {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+        .genre-tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            background: var(--cm-light-gray);
+            border-radius: var(--radius-full);
+            color: var(--cm-steel);
+            font-weight: 500;
+        }
+        
+        /* Badge Component */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .badge-primary {
+            background: rgba(44, 95, 135, 0.1);
+            color: var(--cm-deep-blue);
+        }
+        .badge-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--cm-green);
+        }
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--cm-gold);
+        }
+        .badge-error {
+            background: rgba(233, 75, 60, 0.1);
+            color: var(--cm-coral-red);
+        }
+        
+        /* Rating Component */
+        .rating {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-weight: 600;
+            color: var(--cm-gold);
+        }
+        
+        /* Modal Example */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            animation: fadeIn var(--anim-normal) ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-content {
+            background-color: var(--cm-pearl);
+            margin: 5% auto;
+            padding: var(--space-xxl);
+            border-radius: var(--radius-xl);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            animation: slideUp var(--anim-slow) var(--ease-out);
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .close-modal {
+            position: absolute;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--cm-steel);
+            transition: all var(--anim-fast);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+        }
+        .close-modal:hover {
+            background: var(--cm-light-gray);
+            color: var(--cm-charcoal);
+        }
+        
+        /* Interactive Card */
+        .interactive-card {
+            background: var(--cm-pearl);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #E5E7EB;
+            transition: all var(--anim-normal);
+        }
+        .interactive-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Toast Notification */
+        .toast-container {
+            position: fixed;
+            bottom: var(--space-lg);
+            right: var(--space-lg);
+            z-index: 1002;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        .toast {
+            background: var(--cm-pearl);
+            padding: var(--space-md) var(--space-lg);
+            border-left: 4px solid var(--cm-green);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            min-width: 300px;
+            transform: translateX(calc(100% + 20px));
+            transition: transform var(--anim-slow) var(--ease-out);
+        }
+        .toast.show {
+            transform: translateX(0);
+        }
+        .toast.success {
+            border-left-color: var(--cm-green);
+        }
+        .toast.error {
+            border-left-color: var(--cm-coral-red);
+        }
+        .toast.warning {
+            border-left-color: var(--cm-gold);
+        }
+        
+        /* Animation Examples */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .anim-fade-in {
+            opacity: 0;
+            animation: fadeInUp var(--anim-slow) var(--ease-out) forwards;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: var(--space-xl) var(--space-md);
+            }
+            .component-showcase {
+                grid-template-columns: 1fr;
+            }
+            .nav-fixed {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: var(--space-lg);
+                max-width: 100%;
+            }
+        }
+        
+        /* Utility Classes */
+        .mb-sm { margin-bottom: var(--space-sm); }
+        .mb-md { margin-bottom: var(--space-md); }
+        .mb-lg { margin-bottom: var(--space-lg); }
+        .mt-sm { margin-top: var(--space-sm); }
+        .mt-md { margin-top: var(--space-md); }
+        .mt-lg { margin-top: var(--space-lg); }
+        .text-center { text-align: center; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .gap-sm { gap: var(--space-sm); }
+        .gap-md { gap: var(--space-md); }
+        .gap-lg { gap: var(--space-lg); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🎬 CineMatch Design System</h1>
+        <p>A comprehensive design guide for building the movie discovery platform</p>
+    </header>
+
+    <nav class="nav-fixed">
+        <ul class="nav-list">
+            <li><a href="#overview" class="nav-link">Overview</a></li>
+            <li><a href="#colors" class="nav-link">Colors</a></li>
+            <li><a href="#typography" class="nav-link">Typography</a></li>
+            <li><a href="#buttons" class="nav-link">Buttons</a></li>
+            <li><a href="#components" class="nav-link">Components</a></li>
+            <li><a href="#animations" class="nav-link">Animations</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <section class="section" id="overview">
+            <div class="section-header">
+                <h2 class="section-title">Design Philosophy</h2>
+                <p class="section-subtitle">CineMatch combines cinematic drama with modern usability to create an engaging movie discovery experience.</p>
+            </div>
+            <div class="component-showcase">
+                <div class="interactive-card text-center">
+                    <div style="font-size: 48px; margin-bottom: var(--space-md);">🎬</div>
+                    <h3 class="text-title mb-md">Cinematic</h3>
+                    <p class="text-body text-muted">Dramatic typography, rich imagery, and depth create an immersive film-focused experience.</p>
+                </div>
+                <div class="interactive-card text-center">
+                    <div style="font-size: 48px; margin-bottom: var(--space-md);">✨</div>
+                    <h3 class="text-title mb-md">Delightful</h3>
+                    <p class="text-body text-muted">Smooth animations, polished interactions, and attention to detail make browsing enjoyable.</p>
+                </div>
+                <div class="interactive-card text-center">
+                    <div style="font-size: 48px; margin-bottom: var(--space-md);">🎯</div>
+                    <h3 class="text-title mb-md">Focused</h3>
+                    <p class="text-body text-muted">Clear visual hierarchy and intuitive navigation help users find their next favorite film quickly.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="colors">
+            <div class="section-header">
+                <h2 class="section-title">Color Palette</h2>
+                <p class="section-subtitle">Warm, inviting colors that balance professionalism with entertainment. Click any swatch to copy the CSS variable.</p>
+            </div>
+            
+            <h3 class="text-subtitle mb-lg" style="margin-top: var(--space-xl);">Primary Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch" onclick="copyColor('--cm-deep-blue')">
+                    <div class="color-blob" style="background: var(--cm-deep-blue);"></div>
+                    <div class="color-info">
+                        <strong>Deep Blue</strong>
+                        <span>--cm-deep-blue</span>
+                        <span>#2C5F87</span>
+                    </div>
+                </div>
+                <div class="color-swatch" onclick="copyColor('--cm-coral-red')">
+                    <div class="color-blob" style="background: var(--cm-coral-red);"></div>
+                    <div class="color-info">
+                        <strong>Coral Red</strong>
+                        <span>--cm-coral-red</span>
+                        <span>#E94B3C</span>
+                    </div>
+                </div>
+                <div class="color-swatch" onclick="copyColor('--cm-charcoal')">
+                    <div class="color-blob" style="background: var(--cm-charcoal);"></div>
+                    <div class="color-info">
+                        <strong>Charcoal</strong>
+                        <span>--cm-charcoal</span>
+                        <span>#1A1D23</span>
+                    </div>
+                </div>
+                <div class="color-swatch" onclick="copyColor('--cm-dark-bg')">
+                    <div class="color-blob" style="background: var(--cm-dark-bg);"></div>
+                    <div class="color-info">
+                        <strong>Dark Background</strong>
+                        <span>--cm-dark-bg</span>
+                        <span>#0F1419</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-subtitle mb-lg" style="margin-top: var(--space-xxl);">Accent Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch" onclick="copyColor('--cm-gold')">
+                    <div class="color-blob" style="background: var(--cm-gold);"></div>
+                    <div class="color-info">
+                        <strong>Gold</strong>
+                        <span>--cm-gold</span>
+                        <span>#F59E0B</span>
+                    </div>
+                </div>
+                <div class="color-swatch" onclick="copyColor('--cm-purple')">
+                    <div class="color-blob" style="background: var(--cm-purple);"></div>
+                    <div class="color-info">
+                        <strong>Purple</strong>
+                        <span>--cm-purple</span>
+                        <span>#8B5CF6</span>
+                    </div>
+                </div>
+                <div class="color-swatch" onclick="copyColor('--cm-teal')">
+                    <div class="color-blob" style="background: var(--cm-teal);"></div>
+                    <div class="color-info">
+                        <strong>Teal</strong>
+                        <span>--cm-teal</span>
+                        <span>#14B8A6</span>
+                    </div>
+                </div>
+                <div class="color-swatch" onclick="copyColor('--cm-green')">
+                    <div class="color-blob" style="background: var(--cm-green);"></div>
+                    <div class="color-info">
+                        <strong>Green</strong>
+                        <span>--cm-green</span>
+                        <span>#10B981</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-subtitle mb-lg" style="margin-top: var(--space-xxl);">Neutrals</h3>
+            <div class="color-grid">
+                <div class="color-swatch" onclick="copyColor('--cm-slate')">
+                    <div class="color-blob" style="background: var(--cm-slate);"></div>
+                    <div class="color-info">
+                        <strong>Slate</strong>
+                        <span>--cm-slate</span>
+                        <span>#2A2E35</span>
+                    </div>
+                </div>
+                <div class="color-swatch" onclick="copyColor('--cm-steel')">
+                    <div class="color-blob" style="background: var(--cm-steel);"></div>
+                    <div class="color-info">
+                        <strong>Steel</strong>
+                        <span>--cm-steel</span>
+                        <span>#4A5568</span>
+                    </div>
+                </div>
+                <div class="color-swatch" onclick="copyColor('--cm-silver')">
+                    <div class="color-blob" style="background: var(--cm-silver);"></div>
+                    <div class="color-info">
+                        <strong>Silver</strong>
+                        <span>--cm-silver</span>
+                        <span>#9CA3AF</span>
+                    </div>
+                </div>
+                <div class="color-swatch" onclick="copyColor('--cm-light-gray')">
+                    <div class="color-blob" style="background: var(--cm-light-gray);"></div>
+                    <div class="color-info">
+                        <strong>Light Gray</strong>
+                        <span>--cm-light-gray</span>
+                        <span>#F5F5F5</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="typography">
+            <div class="section-header">
+                <h2 class="section-title">Typography</h2>
+                <p class="section-subtitle">Playfair Display for dramatic headings, Inter for clean UI text.</p>
+            </div>
+            
+            <div class="interactive-card mb-lg">
+                <p class="text-display">Discover Your Next Favorite Film</p>
+                <p class="text-small text-muted mt-md">Display text: 48px, Playfair Display, 800 weight</p>
+            </div>
+            
+            <div class="interactive-card mb-lg">
+                <p class="text-heading">The Shawshank Redemption</p>
+                <p class="text-small text-muted mt-md">Heading text: 36px, Playfair Display, 700 weight</p>
+            </div>
+            
+            <div class="interactive-card mb-lg">
+                <p class="text-title">Trending Now</p>
+                <p class="text-small text-muted mt-md">Title text: 24px, Inter, 600 weight</p>
+            </div>
+            
+            <div class="interactive-card mb-lg">
+                <p class="text-subtitle">Curated collections for every mood</p>
+                <p class="text-small text-muted mt-md">Subtitle text: 18px, Inter, 500 weight</p>
+            </div>
+            
+            <div class="interactive-card mb-lg">
+                <p class="text-body">A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.</p>
+                <p class="text-small text-muted mt-md">Body text: 16px, Inter, 400 weight</p>
+            </div>
+        </section>
+
+        <section class="section" id="buttons">
+            <div class="section-header">
+                <h2 class="section-title">Buttons</h2>
+                <p class="section-subtitle">Clear, accessible buttons with smooth hover effects.</p>
+            </div>
+            
+            <div class="interactive-card mb-lg">
+                <h3 class="text-title mb-md">Button Variants</h3>
+                <div class="flex gap-md" style="flex-wrap: wrap;">
+                    <button class="btn btn-primary">Primary Button</button>
+                    <button class="btn btn-secondary">Secondary Button</button>
+                    <button class="btn btn-outline">Outline Button</button>
+                    <button class="btn btn-ghost">Ghost Button</button>
+                </div>
+            </div>
+            
+            <div class="interactive-card mb-lg">
+                <h3 class="text-title mb-md">Button Sizes</h3>
+                <div class="flex gap-md items-center" style="flex-wrap: wrap;">
+                    <button class="btn btn-primary btn-large">Large Button</button>
+                    <button class="btn btn-primary">Default Button</button>
+                    <button class="btn btn-primary btn-small">Small Button</button>
+                </div>
+            </div>
+            
+            <div class="interactive-card">
+                <h3 class="text-title mb-md">Button with Icon</h3>
+                <button class="btn btn-primary">
+                    <span>⭐</span>
+                    Add to Watchlist
+                </button>
+            </div>
+        </section>
+
+        <section class="section" id="components">
+            <div class="section-header">
+                <h2 class="section-title">Components</h2>
+                <p class="section-subtitle">Reusable UI components with consistent styling.</p>
+            </div>
+            
+            <h3 class="text-subtitle mb-lg">Movie Card</h3>
+            <div style="max-width: 280px; margin-bottom: var(--space-xxl);">
+                <div class="movie-card">
+                    <div class="movie-card-image">
+                        🎬
+                    </div>
+                    <div class="movie-card-content">
+                        <h4 class="movie-card-title">Inception</h4>
+                        <div class="movie-card-meta">
+                            <span>2010</span>
+                            <span class="rating">⭐ 8.8</span>
+                        </div>
+                        <div class="movie-card-genre">
+                            <span class="genre-tag">Sci-Fi</span>
+                            <span class="genre-tag">Thriller</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-subtitle mb-lg">Badges</h3>
+            <div class="interactive-card mb-lg">
+                <div class="flex gap-md" style="flex-wrap: wrap;">
+                    <span class="badge badge-primary">Featured</span>
+                    <span class="badge badge-success">✓ High Rated</span>
+                    <span class="badge badge-warning">⚠ New Release</span>
+                    <span class="badge badge-error">✕ Ending Soon</span>
+                </div>
+            </div>
+            
+            <h3 class="text-subtitle mb-lg">Input Field</h3>
+            <div class="interactive-card mb-lg">
+                <input type="text" class="input-field" placeholder="Search movies, actors, directors...">
+            </div>
+            
+            <h3 class="text-subtitle mb-lg">Genre Tags</h3>
+            <div class="interactive-card mb-lg">
+                <div class="flex gap-sm" style="flex-wrap: wrap;">
+                    <span class="genre-tag">Action</span>
+                    <span class="genre-tag">Drama</span>
+                    <span class="genre-tag">Comedy</span>
+                    <span class="genre-tag">Sci-Fi</span>
+                    <span class="genre-tag">Horror</span>
+                    <span class="genre-tag">Romance</span>
+                    <span class="genre-tag">Thriller</span>
+                </div>
+            </div>
+            
+            <h3 class="text-subtitle mb-lg">Modal Window</h3>
+            <div class="interactive-card">
+                <button class="btn btn-primary" onclick="openModal('example-modal')">Open Modal Example</button>
+            </div>
+        </section>
+
+        <section class="section" id="animations">
+            <div class="section-header">
+                <h2 class="section-title">Animations</h2>
+                <p class="section-subtitle">Smooth transitions that enhance user experience without distracting.</p>
+            </div>
+            
+            <div class="component-showcase">
+                <div class="interactive-card text-center">
+                    <h3 class="text-title mb-md">Hover Effects</h3>
+                    <p class="text-body text-muted mb-lg">Cards lift and shadow increases on hover for depth and interactivity.</p>
+                    <button class="btn btn-secondary" onclick="showToast('Hover effects add life to interactions!', 'success')">Try Me</button>
+                </div>
+                
+                <div class="interactive-card text-center">
+                    <h3 class="text-title mb-md">Smooth Transitions</h3>
+                    <p class="text-body text-muted mb-lg">All state changes use 0.3s ease-out transitions for smooth visual flow.</p>
+                    <button class="btn btn-secondary" onclick="showToast('Smooth like butter! 🧈', 'success')">Test Transition</button>
+                </div>
+                
+                <div class="interactive-card text-center">
+                    <h3 class="text-title mb-md">Toast Notifications</h3>
+                    <p class="text-body text-muted mb-lg">Slide-in notifications for user feedback without interrupting flow.</p>
+                    <button class="btn btn-secondary" onclick="showToast('Successfully added to watchlist! 🎬', 'success')">Show Toast</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">CSS Variables Reference</h2>
+                <p class="section-subtitle">Copy these variables into your stylesheets for consistency.</p>
+            </div>
+            
+            <div class="interactive-card">
+                <pre style="background: var(--cm-charcoal); color: var(--cm-light-gray); padding: var(--space-lg); border-radius: var(--radius-md); overflow-x: auto; font-size: 14px; line-height: 1.6;">
+:root {
+  /* Primary Colors */
+  --cm-deep-blue: #2C5F87;
+  --cm-coral-red: #E94B3C;
+  --cm-charcoal: #1A1D23;
+  --cm-dark-bg: #0F1419;
+  
+  /* Accents */
+  --cm-gold: #F59E0B;
+  --cm-green: #10B981;
+  --cm-purple: #8B5CF6;
+  --cm-teal: #14B8A6;
+  
+  /* Neutrals */
+  --cm-steel: #4A5568;
+  --cm-silver: #9CA3AF;
+  --cm-light-gray: #F5F5F5;
+  --cm-pearl: #FFFFFF;
+  
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-primary: 'Inter', sans-serif;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+  
+  /* Animation */
+  --anim-fast: 0.15s;
+  --anim-normal: 0.3s;
+  --anim-slow: 0.5s;
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}</pre>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <div id="example-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('example-modal')">&times;</span>
+            <h3 class="text-title mb-md">Add to Watchlist</h3>
+            <p class="text-body mb-lg">This movie has been added to your watchlist. You can view all your saved movies on the Watchlist page.</p>
+            <button class="btn btn-primary" onclick="closeModal('example-modal')">Got it!</button>
+        </div>
+    </div>
+
+    <script>
+        // Copy color variable to clipboard
+        function copyColor(variable) {
+            const text = `var(${variable})`;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`Copied "${text}" to clipboard!`, 'success');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                showToast('Failed to copy color variable', 'error');
+            });
+        }
+
+        // Modal controls
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Toast notifications
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const icon = type === 'success' ? '✓' : type === 'error' ? '✕' : '⚠';
+            toast.innerHTML = `
+                <span style="font-weight: 700; font-size: 18px;">${icon}</span>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        // Smooth scroll for navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Active navigation on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            const targetId = link.getAttribute('href').substring(1);
+                            link.classList.toggle('active', targetId === entry.target.id);
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            sections.forEach(section => {
+                if (section.id) {
+                    observer.observe(section);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

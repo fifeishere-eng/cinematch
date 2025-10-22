@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineMatch - Discover Your Next Favorite Film</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* CineMatch Design System - Based on Design Guide */
+
+        /* CSS Variables */
+        :root {
+          /* CineMatch Brand Colors */
+          --cm-deep-blue: #2C5F87;       /* Primary - Trust & depth */
+          --cm-coral-red: #E94B3C;       /* Secondary - Energy & excitement */
+          --cm-charcoal: #1A1D23;        /* Dark primary */
+          --cm-dark-bg: #0F1419;         /* Background dark */
+          --cm-midnight: #0A0C10;        /* Deepest black */
+          --cm-slate: #2A2E35;           /* Surface dark */
+          --cm-steel: #4A5568;           /* Mid-tone gray */
+          --cm-silver: #9CA3AF;          /* Light gray text */
+          --cm-light-gray: #F5F5F5;      /* Light backgrounds */
+          --cm-off-white: #FAFAFA;       /* Off white */
+          --cm-pearl: #FFFFFF;           /* Pure white */
+          
+          /* Accent Colors */
+          --cm-gold: #F59E0B;            /* Awards/featured */
+          --cm-purple: #8B5CF6;          /* Drama genre */
+          --cm-teal: #14B8A6;            /* Success states */
+          --cm-orange: #FB923C;          /* Action genre */
+          --cm-pink: #EC4899;            /* Romance genre */
+          --cm-green: #10B981;           /* Positive ratings */
+          
+          /* Functional Colors */
+          --primary: var(--cm-deep-blue);
+          --secondary: var(--cm-coral-red);
+          --success: var(--cm-green);
+          --warning: var(--cm-gold);
+          --error: var(--cm-coral-red);
+          --info: var(--cm-deep-blue);
+          
+          /* Typography */
+          --font-display: 'Playfair Display', serif;  /* Dramatic headings */
+          --font-primary: 'Inter', sans-serif;        /* UI and body text */
+          --font-mono: 'Monaco', 'Courier New', monospace;
+          
+          /* Spacing Scale */
+          --space-xs: 4px;
+          --space-sm: 8px;
+          --space-md: 16px;
+          --space-lg: 24px;
+          --space-xl: 32px;
+          --space-xxl: 48px;
+          --space-xxxl: 64px;
+          
+          /* Animation */
+          --anim-fast: 0.15s;
+          --anim-normal: 0.3s;
+          --anim-slow: 0.5s;
+          --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+          --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+          --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          
+          /* Shadows - Cinematic depth */
+          --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+          --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+          --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+          --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.3);
+          --shadow-glow: 0 0 20px rgba(44, 95, 135, 0.4);
+          
+          /* Border Radius */
+          --radius-sm: 4px;
+          --radius-md: 8px;
+          --radius-lg: 12px;
+          --radius-xl: 16px;
+          --radius-full: 9999px;
+          
+          /* Layout */
+          --container-max-width: 1200px;
+          --header-height: 60px;
+        }
+
+        /* Reset and Base Styles */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        body {
+          font-family: var(--font-primary);
+          font-size: 16px;
+          line-height: 1.6;
+          color: var(--cm-charcoal);
+          background-color: var(--cm-off-white);
+          overflow-x: hidden;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Container */
+        .container {
+          max-width: var(--container-max-width);
+          margin: 0 auto;
+          padding: 0 var(--space-md);
+        }
+
+        /* Global Header */
+        .global-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: var(--header-height);
+          background: rgba(250, 250, 250, 0.95);
+          backdrop-filter: blur(12px);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+          transition: var(--anim-normal);
+        }
+
+        .header-content {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 100%;
+        }
+
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: var(--space-sm);
+          font-size: 20px;
+          font-weight: 700;
+          font-family: var(--font-display);
+          color: var(--cm-charcoal);
+          text-decoration: none;
+          transition: var(--anim-fast);
+        }
+
+        .logo:hover {
+          color: var(--cm-deep-blue);
+        }
+
+        .logo-icon {
+          font-size: 24px;
+        }
+
+        .main-nav {
+          display: flex;
+          gap: var(--space-xl);
+        }
+
+        .nav-link {
+          color: var(--cm-steel);
+          text-decoration: none;
+          font-weight: 500;
+          padding: var(--space-sm) var(--space-md);
+          border-radius: var(--radius-md);
+          transition: var(--anim-normal);
+          position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+          color: var(--cm-charcoal);
+          background: var(--cm-light-gray);
+        }
+
+        .nav-link.active::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: var(--cm-deep-blue);
+          border-radius: 1px;
+        }
+
+        .header-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--space-md);
+        }
+
+        .search-btn {
+          background: none;
+          border: none;
+          color: var(--cm-steel);
+          font-size: 22px;
+          cursor: pointer;
+          padding: var(--space-sm);
+          border-radius: var(--radius-md);
+          transition: var(--anim-fast);
+        }
+
+        .search-btn:hover {
+          color: var(--cm-charcoal);
+          background: var(--cm-light-gray);
+        }
+
+        /* Hero Section */
+        .hero {
+          position: relative;
+          height: 70vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          background: linear-gradient(135deg, var(--cm-deep-blue), var(--cm-coral-red));
+          padding-top: var(--space-xxl);
+        }
+
+        .hero-backdrop {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url('https://images.unsplash.com/photo-1489599808417-8a8b4b4b4b4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+          z-index: -2;
+        }
+
+        .hero-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.4);
+          z-index: -1;
+        }
+
+        .hero-content {
+          text-align: center;
+          max-width: 800px;
+          z-index: 1;
+          animation: fadeInUp 1s var(--ease-out);
+          color: var(--cm-pearl);
+        }
+
+        .hero-title {
+          font-size: 48px;
+          font-weight: 800;
+          font-family: var(--font-display);
+          margin-bottom: var(--space-lg);
+          line-height: 1.1;
+          letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+          font-size: 20px;
+          color: rgba(255, 255, 255, 0.9);
+          margin-bottom: var(--space-xxl);
+          font-weight: 400;
+        }
+
+        .hero-search {
+          display: flex;
+          gap: var(--space-md);
+          margin-bottom: var(--space-xxl);
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .search-input {
+          flex: 1;
+          padding: var(--space-lg);
+          font-size: 18px;
+          border: 2px solid rgba(255, 255, 255, 0.2);
+          border-radius: var(--radius-xl);
+          background: rgba(255, 255, 255, 0.1);
+          color: var(--cm-pearl);
+          backdrop-filter: blur(10px);
+          transition: var(--anim-normal);
+        }
+
+        .search-input::placeholder {
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-input:focus {
+          outline: none;
+          border-color: var(--cm-pearl);
+          box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .search-submit {
+          padding: var(--space-lg) var(--space-xl);
+          background: var(--cm-pearl);
+          color: var(--cm-deep-blue);
+          border: none;
+          border-radius: var(--radius-xl);
+          font-size: 18px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: var(--anim-normal);
+        }
+
+        .search-submit:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .cta-button {
+          padding: var(--space-lg) var(--space-xxl);
+          background: transparent;
+          color: var(--cm-pearl);
+          border: 2px solid var(--cm-pearl);
+          border-radius: var(--radius-xl);
+          font-size: 18px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: var(--anim-normal);
+        }
+
+        .cta-button:hover {
+          background: var(--cm-pearl);
+          color: var(--cm-deep-blue);
+          transform: translateY(-2px);
+        }
+
+        /* Sections */
+        .trending-section,
+        .collections-section {
+          padding: var(--space-xl) 0;
+          background: var(--cm-off-white);
+        }
+
+        .section-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: var(--space-lg);
+        }
+
+        .section-title {
+          font-size: 36px;
+          font-weight: 800;
+          font-family: var(--font-display);
+          color: var(--cm-charcoal);
+          margin-bottom: var(--space-sm);
+          line-height: 1.2;
+          letter-spacing: -0.01em;
+        }
+
+        .view-all-link {
+          color: var(--cm-deep-blue);
+          text-decoration: none;
+          font-weight: 600;
+          transition: var(--anim-fast);
+        }
+
+        .view-all-link:hover {
+          color: var(--cm-coral-red);
+        }
+
+        /* Movie Carousel */
+        .movie-carousel {
+          display: flex;
+          gap: var(--space-lg);
+          overflow-x: auto;
+          padding: var(--space-md) 0;
+          scroll-behavior: smooth;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .movie-carousel::-webkit-scrollbar {
+          display: none;
+        }
+
+        .movie-card {
+          flex: 0 0 200px;
+          background: var(--cm-pearl);
+          border-radius: var(--radius-lg);
+          overflow: hidden;
+          transition: var(--anim-normal) var(--ease-out);
+          cursor: pointer;
+          position: relative;
+          box-shadow: var(--shadow-sm);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-card:hover {
+          transform: translateY(-8px);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .movie-poster {
+          width: 100%;
+          height: 300px;
+          object-fit: cover;
+        }
+
+        .movie-info {
+          padding: var(--space-md);
+        }
+
+        .movie-title {
+          font-size: 16px;
+          font-weight: 600;
+          margin-bottom: var(--space-xs);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: var(--cm-charcoal);
+        }
+
+        .movie-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: var(--space-sm);
+        }
+
+        .year {
+          color: var(--cm-steel);
+          font-size: 14px;
+        }
+
+        .rating {
+          color: var(--cm-gold);
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .movie-genres {
+          display: flex;
+          gap: var(--space-xs);
+          flex-wrap: wrap;
+        }
+
+        .genre-tag {
+          background: var(--cm-light-gray);
+          color: var(--cm-steel);
+          padding: var(--space-xs) var(--space-sm);
+          border-radius: var(--radius-full);
+          font-size: 12px;
+          font-weight: 500;
+        }
+
+        .watchlist-btn {
+          position: absolute;
+          top: var(--space-md);
+          right: var(--space-md);
+          background: rgba(0, 0, 0, 0.7);
+          color: var(--cm-pearl);
+          border: none;
+          padding: var(--space-sm);
+          border-radius: var(--radius-md);
+          cursor: pointer;
+          opacity: 0;
+          transition: var(--anim-normal);
+          backdrop-filter: blur(10px);
+        }
+
+        .movie-card:hover .watchlist-btn {
+          opacity: 1;
+        }
+
+        .watchlist-btn:hover {
+          background: var(--cm-deep-blue);
+        }
+
+        /* Collections Grid */
+        .collections-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: var(--space-xl);
+        }
+
+        .collection-card {
+          position: relative;
+          height: 250px;
+          border-radius: var(--radius-xl);
+          overflow: hidden;
+          cursor: pointer;
+          transition: var(--anim-normal) var(--ease-out);
+          box-shadow: var(--shadow-sm);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .collection-card:hover {
+          transform: translateY(-8px);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .collection-backdrop {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-size: cover;
+          background-position: center;
+          z-index: -2;
+          transition: transform var(--anim-slow) var(--ease-out);
+          transform: scale(1);
+        }
+
+        .collection-card:hover .collection-backdrop { transform: scale(1.02); }
+
+        .collection-card[data-collection="hidden-gems"] .collection-backdrop {
+          background-image: url('https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1200&auto=format&fit=crop');
+        }
+
+        .collection-card[data-collection="classic-thrillers"] .collection-backdrop {
+          background-image: url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963f?q=80&w=1200&auto=format&fit=crop');
+        }
+
+        .collection-card[data-collection="award-winners"] .collection-backdrop {
+          background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1200&auto=format&fit=crop');
+        }
+
+        .collection-card[data-collection="90s-nostalgia"] .collection-backdrop {
+          background-image: url('https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?q=80&w=1200&auto=format&fit=crop');
+        }
+
+        .collection-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(180deg, rgba(10,12,16,0.04) 0%, rgba(10,12,16,0.22) 55%, rgba(10,12,16,0.38) 100%);
+          z-index: -1;
+        }
+
+        .collection-content {
+          position: relative;
+          z-index: 1;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: var(--space-xl);
+          color: var(--cm-pearl);
+        }
+
+        /* Badge component (from design guide) */
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-xs);
+          padding: 6px 12px;
+          border-radius: var(--radius-full);
+          font-size: 14px;
+          font-weight: 600;
+          margin-bottom: var(--space-md);
+          box-shadow: var(--shadow-md);
+          text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+        }
+        .badge-primary {
+          background: rgba(44, 95, 135, 0.65);
+          color: var(--cm-pearl);
+          backdrop-filter: blur(2px);
+        }
+
+        .collection-title {
+          font-size: 26px;
+          font-weight: 700;
+          font-family: var(--font-display);
+          margin-bottom: var(--space-sm);
+        }
+
+        .collection-subtitle {
+          color: rgba(255, 255, 255, 0.8);
+          margin-bottom: var(--space-md);
+        }
+
+        .collection-count {
+          color: var(--cm-gold);
+          font-weight: 600;
+          text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+        }
+
+        /* Global Footer */
+        .global-footer {
+          background: var(--cm-charcoal);
+          padding: var(--space-xxxl) 0 var(--space-xl);
+          margin-top: var(--space-xxxl);
+        }
+
+        .footer-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: var(--space-xl);
+        }
+
+        .footer-brand .logo {
+          margin-bottom: var(--space-md);
+        }
+
+        .footer-tagline {
+          color: var(--cm-silver);
+          font-size: 14px;
+        }
+
+        .footer-links {
+          display: flex;
+          gap: var(--space-xl);
+        }
+
+        .footer-link {
+          color: var(--cm-silver);
+          text-decoration: none;
+          transition: var(--anim-fast);
+        }
+
+        .footer-link:hover {
+          color: var(--cm-pearl);
+        }
+
+        .footer-bottom {
+          border-top: 1px solid var(--cm-slate);
+          padding-top: var(--space-lg);
+          text-align: center;
+        }
+
+        .copyright {
+          color: var(--cm-steel);
+          font-size: 14px;
+        }
+
+        /* Search Modal */
+        .search-modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 2000;
+          display: none;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .search-modal.active {
+          display: flex;
+        }
+
+        .modal-backdrop {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.8);
+          backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+          position: relative;
+          background: var(--cm-pearl);
+          border-radius: var(--radius-xl);
+          width: 90%;
+          max-width: 600px;
+          max-height: 80vh;
+          overflow: hidden;
+          animation: slideUp var(--anim-slow) var(--ease-out);
+          box-shadow: var(--shadow-xl);
+        }
+
+        .modal-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: var(--space-xl);
+          border-bottom: 1px solid var(--cm-light-gray);
+        }
+
+        .modal-header h3 {
+          font-size: 20px;
+          font-weight: 600;
+          color: var(--cm-charcoal);
+        }
+
+        .modal-close {
+          background: none;
+          border: none;
+          color: var(--cm-steel);
+          font-size: 20px;
+          cursor: pointer;
+          padding: var(--space-sm);
+          border-radius: var(--radius-md);
+          transition: var(--anim-fast);
+        }
+
+        .modal-close:hover {
+          color: var(--cm-charcoal);
+          background: var(--cm-light-gray);
+        }
+
+        .modal-body {
+          padding: var(--space-xl);
+        }
+
+        .search-results {
+          margin-top: var(--space-lg);
+          max-height: 400px;
+          overflow-y: auto;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .container {
+            padding: 0 var(--space-md);
+          }
+          
+          .hero-title {
+            font-size: 36px;
+          }
+          
+          .hero-subtitle {
+            font-size: 18px;
+          }
+          
+          .hero-search {
+            flex-direction: column;
+          }
+          
+          .main-nav {
+            gap: var(--space-lg);
+          }
+          
+          .collections-grid {
+            grid-template-columns: 1fr;
+          }
+          
+          .footer-content {
+            flex-direction: column;
+            gap: var(--space-lg);
+          }
+          
+          .footer-links {
+            flex-wrap: wrap;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-title {
+            font-size: 28px;
+          }
+          
+          .section-title {
+            font-size: 28px;
+          }
+          
+          .movie-card {
+            flex: 0 0 160px;
+          }
+          
+          .movie-poster {
+            height: 240px;
+          }
+        }
+    </style>
+</head>
+<body>
+    <!-- Global Navigation -->
+    <header class="global-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🎬</span>
+                    <span class="logo-text">CineMatch</span>
+                </div>
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="browse.html" class="nav-link">Browse</a>
+                    <a href="watchlist.html" class="nav-link">Watchlist</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="search-btn" id="searchBtn" aria-label="Search">
+                        <span class="search-icon">🔎</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-backdrop">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Discover Your Next Favorite Film</h1>
+                <p class="hero-subtitle">Curated recommendations, personalized collections, and thousands of films to explore</p>
+                <div class="hero-search">
+                    <input type="text" class="search-input" placeholder="Search movies, actors, directors..." id="heroSearch">
+                    <button class="search-submit">Search</button>
+                </div>
+                <button class="cta-button">Start Exploring</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Now Section -->
+    <section class="trending-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Trending Now</h2>
+                <a href="browse.html" class="view-all-link">View All →</a>
+            </div>
+            <div class="movie-carousel" id="trendingCarousel">
+                <!-- Trending movies will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Curated Collections Section -->
+    <section class="collections-section">
+        <div class="container">
+            <h2 class="section-title">Curated Collections</h2>
+            <div class="collections-grid">
+                <div class="collection-card" data-collection="hidden-gems">
+                    <div class="collection-backdrop">
+                        <div class="collection-overlay"></div>
+                    </div>
+                    <div class="collection-content">
+                        <h3 class="collection-title">Hidden Gems</h3>
+                        <p class="collection-subtitle">Underseen masterpieces</p>
+                        <span class="collection-count">24 films</span>
+                    </div>
+                </div>
+                <div class="collection-card" data-collection="classic-thrillers">
+                    <div class="collection-backdrop">
+                        <div class="collection-overlay"></div>
+                    </div>
+                    <div class="collection-content">
+                        <h3 class="collection-title">Classic Thrillers</h3>
+                        <p class="collection-subtitle">Suspense classics</p>
+                        <span class="collection-count">18 films</span>
+                    </div>
+                </div>
+                <div class="collection-card" data-collection="award-winners">
+                    <div class="collection-backdrop">
+                        <div class="collection-overlay"></div>
+                    </div>
+                    <div class="collection-content">
+                        <h3 class="collection-title">Award Winners</h3>
+                        <p class="collection-subtitle">Oscar & festival favorites</p>
+                        <span class="collection-count">32 films</span>
+                    </div>
+                </div>
+                <div class="collection-card" data-collection="90s-nostalgia">
+                    <div class="collection-backdrop">
+                        <div class="collection-overlay"></div>
+                    </div>
+                    <div class="collection-content">
+                        <h3 class="collection-title">90s Nostalgia</h3>
+                        <p class="collection-subtitle">Decade-defining films</p>
+                        <span class="collection-count">28 films</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-icon">🎬</span>
+                        <span class="logo-text">CineMatch</span>
+                    </div>
+                    <p class="footer-tagline">Your gateway to cinematic discovery</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">About</a>
+                    <a href="#" class="footer-link">Contact</a>
+                    <a href="#" class="footer-link">Privacy</a>
+                    <a href="#" class="footer-link">Terms</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 CineMatch. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Search Movies</h3>
+                <button class="modal-close" id="closeSearchModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="search-input" placeholder="Search movies, actors, directors..." id="modalSearch">
+                <div class="search-results" id="searchResults">
+                    <!-- Search results will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
